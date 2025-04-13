@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}
+</style>
+</head>
+<body>
+
+<p id="label"></p>
+<p id="timer"></p>
+
+<script>
+
+// Set the labels for each interval
+var labels = [
+  'Label 1',
+  'Label 2',
+  'Label 3',
+  'Label 4',
+  'Label 5',
+];
+var ltotal_oops = labels.length;
+var current_loop = 0;
+
+// Function for each interval
+var interval_timer = function(label) {
+  // Display the label
+  document.getElementById("label").innerHTML = label;
+
+  // Make target time 60 seconds from now
+  var target = new Date.now();
+  target = target.setSeconds(target.getSeconds() + 60);
+
+  // Run the interval
+  var interval = setInterval(function() {
+    // Get current date and time
+    var now = new Date().getTime();
+
+    // Get the time difference between now and the target
+    var difference = target - now;
+    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    
+    // Display time left
+    document.getElementById("timer").innerHTML =  seconds + " seconds";
+    
+    // When the timer ends, play a sound and start the next 
+    if (difference  < 0) {
+      clearInterval(interval);
+
+      // Increment the loop counter and potentially repeat
+      current_loop = current_loop + 1;
+      if (current_loop < total_loops) {
+        interval_timer(labels[current_loop]);
+      };
+      // PLAY SOUND HERE
+    }
+  }, 1000);};
+  
+</script>
+
+</body>
+</html>
