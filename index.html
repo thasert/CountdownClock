@@ -19,7 +19,7 @@ p {
 </head>
 <body>
 
-<p id="title"></p>
+<p id="title"><button onclick="start">Start</button><br>Click to Start</p>
 <p id="timer"></p>
 <p><image id="image" src=""/></p>
 <p id="directions"></p>
@@ -185,7 +185,7 @@ p {
         clearInterval(interval);
   
         // Play the interval-completion sound
-        sound.play()
+        sound.play();
         
         // Increment the loop counter and potentially repeat
         current_loop = current_loop + 1;
@@ -203,11 +203,14 @@ p {
       }
     }, 200);};
   
+  function start() {
     // Start the first interval
+    sound.play();
     interval_timer(intervals[current_loop][0],
                    intervals[current_loop][1],
                    intervals[current_loop][2],
                    intervals[current_loop][3]);
+  }
 
 </script>
 
