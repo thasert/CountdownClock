@@ -25,7 +25,7 @@ var labels = [
   'Label 4',
   'Label 5',
 ];
-var ltotal_oops = labels.length;
+var total_loops = labels.length;
 var current_loop = 0;
 
 // Function for each interval
@@ -34,7 +34,7 @@ var interval_timer = function(label) {
   document.getElementById("label").innerHTML = label;
 
   // Make target time 60 seconds from now
-  var target = new Date.now();
+  var target = new Date();
   target = target.setSeconds(target.getSeconds() + 60);
 
   // Run the interval
@@ -60,8 +60,12 @@ var interval_timer = function(label) {
       };
       // PLAY SOUND HERE
     }
-  }, 1000);};
+  }, 250);};
   
+
+  // Run the first interval
+  interval_timer(labels[current_loop]);
+
 </script>
 
 </body>
