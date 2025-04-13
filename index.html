@@ -22,6 +22,7 @@ p, button {
 <p id="title">
   <button onclick="start(1)">Start Level 1</button>
   <button onclick="start(2)"> Start Level 2</button>
+  <button onclick="start(0)" style="display:none">Level 1 Quick Test</button>
   <button onclick="start(3)" style="display:none">Level 2 Quick Test</button>
 </p>
 <p id="timer">
@@ -169,13 +170,16 @@ p, button {
   // Function for each interval
   var interval_timer = function(title, directions, image, length) {
     // Display the interval
-    document.getElementById("title").innerHTML = (chosen_level > 1 ? ("Round " + (level>1 ? 1 : 2)) + " " : "")+ title;
+    document.getElementById("title").innerHTML = 
+      (chosen_level > 1 && current_interval >= 5 && current_interval <= 20)
+      ? ("Round " + (level>1 ? 1 : 2) + " ") 
+      : "")+ title;
     document.getElementById("directions").innerHTML = directions;
     document.getElementById("image").src = 'images/'+image;
 
-    if (chosen_level == 3) {
+    if (chosen_level == 0 || chosen_level == 3) {
        // Display debugging info in the directions
-      document.getElementById("directions").innerHTML = "Pass #" + (level>1 ? 1 : 2) + " Interval #" + current_interval
+      document.getElementById("directions").innerHTML = (level>1 ? "First" : "Final") + " Pass, Interval #" + (current_interval + 1)
     }
 
     // Debugging by short intervals with chosen_level 3
