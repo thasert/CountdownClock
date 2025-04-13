@@ -27,12 +27,14 @@ p, button {
   Click to start a single round (level 1) or a double round (level 2)
 </p>
 <p><image id="image" src=""/></p>
-<p id="directions"></p>
+<p id="directions">
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><button onclick="start(3)">Level 2 Quick Test</button>
+</p>
 
 <script>
 
   // Set the title, directions, image, and length for each interval.
-  // This also controls the number of loops.
+  // This also controls the number of intervals.
   var intervals = [
     [
       'Warm Up: Easy Step Up',
@@ -154,12 +156,12 @@ p, button {
       'rest.png',
       60],
   ];
-  var total_loops = intervals.length;
-  var current_loop = 0;
+  var total_intervals = intervals.length;
+  var current_interval = 0;
 
   // Level 2 will jump from the end of set 4 (index 19)
   // to the start of set 1 (index 4) to repeat these.
-  var level = 1;
+  var chosen_level = 1, level = 1;
   
   // Sound for completing each interval
   // With credit to linhmitto at https://pixabay.com/sound-effects/bellding-254774/
@@ -171,6 +173,11 @@ p, button {
     document.getElementById("title").innerHTML = title;
     document.getElementById("directions").innerHTML = directions;
     document.getElementById("image").src = 'images/'+image;
+
+    // Debugging by short intervals with chosen_level 3
+    if (chosen_level == 3) {
+      length = 2;
+    }
   
     // Make target time from current time
     var target = new Date();
@@ -196,20 +203,20 @@ p, button {
         // Play the interval-completion sound
         sound.play();
         
-        // Adjust the loop counter and potentially repeat
-        if (level == 2 && current_loop == 19) {
+        // Adjust the interval counter and potentially repeat
+        if (level == 2 && current_interval == 19) {
           // Repeat sets 1-4 the first time through level 2
           level = 1;
-          current_loop = 4;
+          current_interval = 4;
         }
         else {
-          current_loop = current_loop + 1;
+          current_interval = current_interval + 1;
         }
-        if (current_loop < total_loops) {
-          interval_timer(intervals[current_loop][0],
-                         intervals[current_loop][1],
-                         intervals[current_loop][2],
-                         intervals[current_loop][3]);
+        if (current_interval < total_intervals) {
+          interval_timer(intervals[current_interval][0],
+                         intervals[current_interval][1],
+                         intervals[current_interval][2],
+                         intervals[current_interval][3]);
         }
         else {
           document.getElementById("title").innerHTML = "Done";
@@ -219,15 +226,16 @@ p, button {
       }
     }, 200);};
   
-  function start(chosen_level) {
+  function start(start_level) {
     // Set the choice for single or double round
-    level = chosen_level;
+    chosen_level = level = start_level;
+    
     // Start the first interval
     sound.play();
-    interval_timer(intervals[current_loop][0],
-                   intervals[current_loop][1],
-                   intervals[current_loop][2],
-                   intervals[current_loop][3]);
+    interval_timer(intervals[current_interval][0],
+                   intervals[current_interval][1],
+                   intervals[current_interval][2],
+                   intervals[current_interval][3]);
   }
 
 </script>
