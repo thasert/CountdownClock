@@ -17,57 +17,62 @@ p {
 
 <script>
 
-// Set the labels for each interval
-var labels = [
-  'Label 1',
-  'Label 2',
-];
-var total_loops = labels.length;
-var current_loop = 0;
-
-// Function for each interval
-var interval_timer = function(label) {
-  // Display the label
-  document.getElementById("label").innerHTML = label;
-
-  // Make target time 60 seconds from now
-  var target = new Date();
-  target = target.setSeconds(target.getSeconds() + 60);
-
-  // Run the interval
-  var interval = setInterval(function() {
-    // Get current date and time
-    var now = new Date().getTime();
-
-    // Get the time difference between now and the target
-    var difference = target - now;
-    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    
-    // Display time left if greater than zero
-    if (seconds >= 0) {
-      document.getElementById("timer").innerHTML =  seconds + " seconds";
-    }
-    else {
-      // When the timer ends, reset the interval, play a sound, and start the next 
-      clearInterval(interval);
-
-      // PLAY SOUND HERE
+  // Set the labels for each interval.
+  // This also controls the number of loops.
+  var labels = [
+    'Label 1',
+    'Label 2',
+  ];
+  var total_loops = labels.length;
+  var current_loop = 0;
+  
+  // Sound for completing each interval
+  // With credit to linhmitto at https://pixabay.com/sound-effects/bellding-254774/
+  var sound = new Audio("bellding-254774.mp3");
+  
+  // Function for each interval
+  var interval_timer = function(label) {
+    // Display the label
+    document.getElementById("label").innerHTML = label;
+  
+    // Make target time 60 seconds from now
+    var target = new Date();
+    target = target.setSeconds(target.getSeconds() + 60);
+  
+    // Run the interval
+    var interval = setInterval(function() {
+      // Get current date and time
+      var now = new Date().getTime();
+  
+      // Get the time difference between now and the target
+      var difference = target - now;
+      var seconds = Math.floor((difference % (1000 * 60)) / 1000);
       
-      // Increment the loop counter and potentially repeat
-      current_loop = current_loop + 1;
-      if (current_loop < total_loops) {
-        interval_timer(labels[current_loop]);
+      // Display time left if greater than zero
+      if (seconds >= 0) {
+        document.getElementById("timer").innerHTML =  seconds + " seconds";
       }
       else {
-        document.getElementById("label").innerHTML = "";
-        document.getElementById("timer").innerHTML =  "FINISHED";
-      }
-    }
-  }, 200);};
+        // When the timer ends, reset the interval, play a sound, and start the next 
+        clearInterval(interval);
   
-
-  // Run the first interval
-  interval_timer(labels[current_loop]);
+        // Play the interval-completion sound
+        sound.play()
+        
+        // Increment the loop counter and potentially repeat
+        current_loop = current_loop + 1;
+        if (current_loop < total_loops) {
+          interval_timer(labels[current_loop]);
+        }
+        else {
+          document.getElementById("label").innerHTML = "";
+          document.getElementById("timer").innerHTML =  "FINISHED";
+        }
+      }
+    }, 200);};
+  
+    // Start the first interval
+    interval_timer(labels[current_loop]);
 
 </script>
 
