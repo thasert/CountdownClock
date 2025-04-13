@@ -174,6 +174,11 @@ p, button {
     document.getElementById("directions").innerHTML = directions;
     document.getElementById("image").src = 'images/'+image;
 
+    if (chosen_level == 3 && current_interval == 19) {
+       // Display debugging info in the directions
+      document.getElementById("directions").innerHTML = "Pass #" + (level==2 ? 1 : 2) + " inteval #" + current_interval
+    }
+
     // Debugging by short intervals with chosen_level 3
     if (chosen_level == 3) {
       length = 2;
