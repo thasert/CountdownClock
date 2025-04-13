@@ -22,14 +22,13 @@ p, button {
 <p id="title">
   <button onclick="start(1)">Start Level 1</button>
   <button onclick="start(2)"> Start Level 2</button>
+  <button onclick="start(3)" style="display:none">Level 2 Quick Test</button>
 </p>
 <p id="timer">
   Click to start a single round (level 1) or a double round (level 2)
 </p>
 <p><image id="image" src=""/></p>
-<p id="directions">
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><button onclick="start(3)">Level 2 Quick Test</button>
-</p>
+<p id="directions"></p>
 
 <script>
 
@@ -176,7 +175,7 @@ p, button {
 
     if (chosen_level == 3) {
        // Display debugging info in the directions
-      document.getElementById("directions").innerHTML = "Pass #" + (level==2 ? 1 : 2) + " inteval #" + current_interval
+      document.getElementById("directions").innerHTML = "Pass #" + (level>1 ? 1 : 2) + " Inteval #" + current_interval
     }
 
     // Debugging by short intervals with chosen_level 3
