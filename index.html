@@ -12,18 +12,137 @@ p {
 </head>
 <body>
 
-<p id="label"></p>
+<p id="title"></p>
 <p id="timer"></p>
+<p><image id="image" src=""/></p>
+<p id="directions"></p>
 
 <script>
 
-  // Set the labels for each interval.
+  // Set the title, directions, image, and length for each interval.
   // This also controls the number of loops.
-  var labels = [
-    'Label 1',
-    'Label 2',
+  var intervals = [
+    [
+      'Warm Up: Easy Step Up',
+      'Alternate leading leg up and down',
+      'activity1.png',
+      60],
+    [
+      'Warm Up: Cat Cows',
+      '',
+      'activity2.png'],
+    [
+      'Warm Up: Up/Down',
+      'Practive getting up/down from the floor',
+      'activity3.png',
+      60],
+    [
+      'Warm Up: Rest',
+      '1 minute',
+      'rest.png',
+      60],
+    [
+      'Set 1: Air Squats',
+      'As many as you can in 1 minute',
+      'activity4png',
+      60],
+    [
+      'Set 1: Push Ups',
+      'Can be on knees!',
+      'activity5.png',
+      60],
+    [
+      'Set 1: Step Ups- Moderate Intensity',
+      'Alternate leading leg up and down',
+      'activity6.png',
+      60],
+    [
+      'Set 1: Rest',
+      '1 minutes',
+      'rest.png',
+      60],
+    [
+      'Set 2: Glute Bridge',
+      'Keep hips high, squeeze butt, hold for 5 sec, then lower',
+      'activity7.png',
+      60],
+    [
+      'Set 2: Towel Row',
+      'Wrap towel around fixed object',
+      'activity8.png',
+      60],
+    [
+      'Set 2: Plank Hold',
+      'Keep leg & butt muscles active',
+      'activity9.png',
+      60],
+    [
+      'Set 2: Rest',
+      '1 minute',
+      'rest.png',
+      60],
+    [
+      'Set 3: Calf Raise',
+      'Loweer heels off the edge of step and then raise up on toes',
+      'activity10.png',
+      60],
+    [
+      'Set 3: Russian Twist',
+      'Feel can anchor on floor to make easier',
+      'activity11.png',
+      60],
+    [
+      'Set 3: Walking Lunges',
+      'Keep upper body tall & alternate legs',
+      'activity12.png',
+      60],
+    [
+      'Set 3: Rest',
+      '1 minute',
+      'rest.png',
+      60],
+    [
+      'Set 4: Hamstring Walk-Out',
+      'Starting from glute bridge, walk each heal a few inches out at a time as far as you can, then walk back in',
+      'activity13.png',
+      60],
+    [
+      'Set 4: Single Leg Balnce',
+      '30 seconds standing on each leg',
+      'activity14.png',
+      30],
+    [
+      'Set 4: Other Leg Balnce',
+      '30 seconds standing on the other leg',
+      'activity14.png',
+      30],
+    [
+      'Set 4: Superman',
+      'Hold position for as much of the minute as you can',
+      'activity15.png',
+      60],
+    [
+      'Set 4: Rest',
+      '1 minute',
+      'rest.png',
+      60],
+    [
+      'Cool Down Set: Easy Walk',
+      'Go outside, walk up and down the hall',
+      'rest.png',
+      60],
+    [
+      'Cool Down Set: Keep Walking',
+      'Focus on slowing down your breath as you slow down your movement',
+      'rest.png',
+      60],
+    [
+      'Cool Down Set: Box Breathing',
+      'Find a comfortable place to stand or sit.  Inhale, hold, exhale, hold each for a count of 4',
+      'rest.png',
+      60],
   ];
-  var total_loops = labels.length;
+  var total_loops = intervals.length;
   var current_loop = 0;
   
   // Sound for completing each interval
@@ -31,13 +150,15 @@ p {
   var sound = new Audio("bellding-254774.mp3");
   
   // Function for each interval
-  var interval_timer = function(label) {
-    // Display the label
-    document.getElementById("label").innerHTML = label;
+  var interval_timer = function(title, directions, image, length) {
+    // Display the interval
+    document.getElementById("title").innerHTML = title;
+    document.getElementById("directions").innerHTML = directions;
+    document.getElementById("image").src = 'images/'+image;
   
     // Make target time 60 seconds from now
     var target = new Date();
-    target = target.setSeconds(target.getSeconds() + 60);
+    target = target.setSeconds(target.getSeconds() + length);
   
     // Run the interval
     var interval = setInterval(function() {
@@ -62,17 +183,24 @@ p {
         // Increment the loop counter and potentially repeat
         current_loop = current_loop + 1;
         if (current_loop < total_loops) {
-          interval_timer(labels[current_loop]);
+          interval_timer(intervals[current_loop][0],
+                         intervals[current_loop][1],
+                         intervals[current_loop][2],
+                         intervals[current_loop][3]);
         }
         else {
-          document.getElementById("label").innerHTML = "";
-          document.getElementById("timer").innerHTML =  "FINISHED";
+          document.getElementById("title").innerHTML = "Done";
+          document.getElementById("timer").innerHTML =  "";
+          document.getElementById("directions").innerHTML = "Nice work!";
         }
       }
     }, 200);};
   
     // Start the first interval
-    interval_timer(labels[current_loop]);
+    interval_timer(intervals[current_loop][0],
+                   intervals[current_loop][1],
+                   intervals[current_loop][2],
+                   intervals[current_loop][3]);
 
 </script>
 
