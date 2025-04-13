@@ -171,9 +171,9 @@ p, button {
   var interval_timer = function(title, directions, image, length) {
     // Display the interval
     document.getElementById("title").innerHTML = 
-      (chosen_level > 1 && current_interval >= 5 && current_interval <= 20)
+      ((chosen_level > 1 && current_interval >= 5 && current_interval <= 20)
       ? ("Round " + (level>1 ? 1 : 2) + " ") 
-      : "")+ title;
+      : "") + title;
     document.getElementById("directions").innerHTML = directions;
     document.getElementById("image").src = 'images/'+image;
 
