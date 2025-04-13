@@ -21,9 +21,6 @@ p {
 var labels = [
   'Label 1',
   'Label 2',
-  'Label 3',
-  'Label 4',
-  'Label 5',
 ];
 var total_loops = labels.length;
 var current_loop = 0;
@@ -46,21 +43,27 @@ var interval_timer = function(label) {
     var difference = target - now;
     var seconds = Math.floor((difference % (1000 * 60)) / 1000);
     
-    // Display time left
-    document.getElementById("timer").innerHTML =  seconds + " seconds";
-    
-    // When the timer ends, play a sound and start the next 
-    if (difference  < 0) {
+    // Display time left if greater than zero
+    if (seconds >= 0) {
+      document.getElementById("timer").innerHTML =  seconds + " seconds";
+    }
+    else {
+      // When the timer ends, reset the interval, play a sound, and start the next 
       clearInterval(interval);
 
+      // PLAY SOUND HERE
+      
       // Increment the loop counter and potentially repeat
       current_loop = current_loop + 1;
       if (current_loop < total_loops) {
         interval_timer(labels[current_loop]);
-      };
-      // PLAY SOUND HERE
+      }
+      else {
+        document.getElementById("label").innerHTML = "";
+        document.getElementById("timer").innerHTML =  "FINISHED";
+      }
     }
-  }, 250);};
+  }, 200);};
   
 
   // Run the first interval
