@@ -90,12 +90,12 @@ p, button {
       60],
     [
       'Set 3: Calf Raise',
-      'Loweer heels off the edge of step and then raise up on toes',
+      'Lower heels off the edge of step and then raise up on toes',
       'activity10.png',
       60],
     [
       'Set 3: Russian Twist',
-      'Feel can anchor on floor to make easier',
+      'Feet can anchor on floor to make easier',
       'activity11.png',
       60],
     [
@@ -114,12 +114,12 @@ p, button {
       'activity13.png',
       60],
     [
-      'Set 4: Single Leg Balnce',
+      'Set 4: Single Leg Balance',
       '30 seconds standing on each leg',
       'activity14.png',
       30],
     [
-      'Set 4: Other Leg Balnce',
+      'Set 4: Other Leg Balance',
       '30 seconds standing on the other leg',
       'activity14.png',
       30],
@@ -163,7 +163,7 @@ p, button {
     document.getElementById("directions").innerHTML = directions;
     document.getElementById("image").src = 'images/'+image;
   
-    // Make target time 60 seconds from now
+    // Make target time from current time
     var target = new Date();
     target = target.setSeconds(target.getSeconds() + length);
   
@@ -174,10 +174,10 @@ p, button {
   
       // Get the time difference between now and the target
       var difference = target - now;
-      var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      var seconds = Math.floor(difference / 1000);
       
       // Display time left if greater than zero
-      if (seconds >= 0) {
+      if (difference >= 0) {
         document.getElementById("timer").innerHTML =  seconds + " seconds";
       }
       else {
