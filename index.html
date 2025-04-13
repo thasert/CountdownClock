@@ -209,7 +209,7 @@ p, button {
         sound.play();
         
         // Adjust the interval counter and potentially repeat
-        if (level == 2 && current_interval == 20) {
+        if (level > 1 && current_interval == 20) {
           // Repeat sets 1-4 the first time through level 2
           level = 1;
           current_interval = 4;
