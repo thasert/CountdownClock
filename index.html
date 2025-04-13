@@ -19,8 +19,13 @@ p, button {
 </head>
 <body>
 
-<p id="title"><button onclick="start()">Start</button><br>Click to Start</p>
-<p id="timer"></p>
+<p id="title">
+  <button onclick="start(1)">Start Level 1</button>
+  <button onclick="start(2)"> Start Level 2</button>
+</p>
+<p id="timer">
+  Click to start a single round (level 1) or a double round (level 2)
+</p>
 <p><image id="image" src=""/></p>
 <p id="directions"></p>
 
@@ -151,6 +156,10 @@ p, button {
   ];
   var total_loops = intervals.length;
   var current_loop = 0;
+
+  // Level 2 will jump from the end of set 4 (index 19)
+  // to the start of set 1 (index 4) to repeat these.
+  var level = 1;
   
   // Sound for completing each interval
   // With credit to linhmitto at https://pixabay.com/sound-effects/bellding-254774/
@@ -188,7 +197,14 @@ p, button {
         sound.play();
         
         // Increment the loop counter and potentially repeat
-        current_loop = current_loop + 1;
+        if (level == 2 && current_loop == 19) {
+          // Repeat sets 1-4 the first time throug level 2
+          level = 1;
+          current_loop = 4;
+        }
+        else {
+          current_loop = current_loop + 1;
+        }
         if (current_loop < total_loops) {
           interval_timer(intervals[current_loop][0],
                          intervals[current_loop][1],
@@ -203,7 +219,9 @@ p, button {
       }
     }, 200);};
   
-  function start() {
+  function start(chosen_level) {
+    // Set the choice for single or double round
+    level = chosen_level;
     // Start the first interval
     sound.play();
     interval_timer(intervals[current_loop][0],
